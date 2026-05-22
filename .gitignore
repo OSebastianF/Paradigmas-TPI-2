@@ -1,1 +1,5 @@
 *.pdf
+pruebas.py
+__pycache__/
+*.pyc
+desktop.ini
