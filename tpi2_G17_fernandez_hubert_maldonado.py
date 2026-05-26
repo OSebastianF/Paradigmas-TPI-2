@@ -42,10 +42,25 @@ class Libro():
         genero = str(input(f'Ingrese el genero del libro \"{titulo}\": '))
         return cls(titulo, autor, anio, genero)
         
+    @staticmethod
+    def mostrar_lista_libros(lista: list[Libro]):
+        """Dada una lista de libros las imprime con el formato: {nro de libro}. [{leido}] - {titulo} ({anio}) - {autor} - {genero}.
+        Si la lista esta vacia, imprime el mensaje 'Lista de Libros vacia.'"""
+        if len(lista) == 0:
+            print('Lista de Libros vacia.')
+        else:
+            aux = 1 # Contador auxiliar
+            for l in lista:
+                print(f"{aux}. {l}")
+                aux += 1
+        
 class Biblioteca():
     def __init__(self, nombre: str):
         self.nombre = nombre
         self.libros: list[Libro] = []
+        
+    def __len__(self):
+        return len(self.libros)
         
     def agregar_libro(self):
         """Solicita los datos al usuario y agrega el nuevo libro a la colección."""
@@ -53,15 +68,21 @@ class Biblioteca():
         
     def mostrar_libros(self):
         """Imprime la lista completa con todos los datos. Indica si está vacía."""
-        pass
+        print(f"=== {len(self)} libros ===")
+        if len(self) == 0:
+            print(f"No hay ningun libro en la biblioteca \"{self.nombre}\".")
+        else:
+            Libro.mostrar_lista_libros(self.libros)
     
     def buscar_por_autor(self, autor: str) -> list:
         """Recibe un nombre de autor y retorna todos sus libros. Es case-sensitive .lower(). Usa una comprensión de lista."""
-        pass
+        autor = autor.lower()
+        return list(filter(lambda l: l.autor.lower() == autor, self.libros))
 
     def filtrar_por_genero(self, genero: str) -> list:
         """Recibe un género y retorna la sublista correspondiente usando filter(). Es case-sensitive .lower()."""
-        pass
+        genero = genero.lower()
+        return list(filter(lambda l: l.genero.lower() == genero, self.libros))
     
     def estadisticas(self):
         """Muestra: total de libros, cantidad leídos, géneros únicos y el libro más reciente."""
@@ -75,3 +96,5 @@ class BibliotecaEspecializada(Biblioteca):
     def estadisticas(self):
         super().estadisticas()
         # TODO: Extender agregando 'especialidad'
+        
+    # TODO: Extender los metodos de la clase Biblioteca que hagan falta
