@@ -1,7 +1,7 @@
 from tpi2_G17_fernandez_hubert_maldonado import *
 from modulo_funcional import *
 
-# TODO: Agreagr menu, opciones, bucles y demas
+# TODO: Implementar los metodos y agregarlos en las opciones
 """El menú del TPI 1 se mantiene, pero ahora opera sobre instancias de BibliotecaEspecializada. Al iniciarse el
 programa, se le solicita al usuario el nombre y la especialidad de la biblioteca."""
 
@@ -18,6 +18,8 @@ def mostrar_opciones():
     
 # Inicio del programa
 
+# TODO: Inicializar la biblioteca
+
 print("***** SISTEMA DE GESTION DE BIBLIOTECA PERSONAL *****")
 
 print('=' * 40)
@@ -25,21 +27,22 @@ print('=' * 40)
 while True:
     mostrar_opciones()
     
-    while True:
+    """while True:
         try:
-            op = int(input("Ingrese la opcion a ejecutar (1-8): "))
+            op = int(input('Ingrese la opcion a ejecutar (1-8): '))
             if (op < 1) or (op > 8):
                 raise ValueError
         except ValueError:
-            print("ERROR (ValueError). No se ingreso una opcion valida (1-8).")
+            print('ERROR (ValueError). No se ingreso una opcion valida (1-8).')
         else:
-            break
+            break"""
+    # Se usa la funcion definida en el archivo principal 
+    op = pedir_entre('Ingrese la opcion a ejecutar (1-8): ', 1, 8)
     
     print('=' * 40)
 
     if(op == 1):
-        # La funcion estatica pedir_libro() pide todos los datos del libro para cargarlos en la lista con agregar_libro()
-        BibliotecaEspecializada.agregar_libro(Libro.pedir_libro())
+        #Biblioteca.agregar_libro()
         print('=' * 40)
 
     elif(op == 2):

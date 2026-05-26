@@ -34,7 +34,7 @@ class Libro():
         self.leido = True
         
     @classmethod
-    def pedir_libro(cls) -> Libro:
+    def pedir_libro(cls): # -> Libro: (Puede crear error 'NameError: name 'Libro is not defined')
         """Pide al usuario los datos de un libro y lo retorna en un objeto de la clase Libro"""
         titulo = str(input('Ingrese el titulo del libro: '))
         autor = str(input(f'Ingrese el nombre del autor de \"{titulo}\": '))
@@ -47,10 +47,14 @@ class Biblioteca():
         self.nombre = nombre
         self.libros: list[Libro] = []
         
-    def agregar_libro(self, libro: Libro):
-        """Agrega el libro pasado como argumento a la lista de libros de la Biblioteca."""
-        self.libros.append(libro)
+    def agregar_libro(self):
+        """Solicita los datos al usuario y agrega el nuevo libro a la colección."""
+        self.libros.append(Libro.pedir_libro())
         
+    def mostrar_libros(self):
+        """Imprime la lista completa con todos los datos. Indica si está vacía."""
+        pass
+    
     def buscar_por_autor(self, autor: str) -> list:
         """Recibe un nombre de autor y retorna todos sus libros. Es case-sensitive .lower(). Usa una comprensión de lista."""
         pass
@@ -62,7 +66,7 @@ class Biblioteca():
     def estadisticas(self):
         """Muestra: total de libros, cantidad leídos, géneros únicos y el libro más reciente."""
         pass
-    
+      
 class BibliotecaEspecializada(Biblioteca):
     def __init__(self, nombre: str, especialidad: str):
         super().__init__(nombre)
