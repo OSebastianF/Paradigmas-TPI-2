@@ -102,6 +102,8 @@ while True:
 # era una variable global, y el resultado de la función se agregaba desde
 # el bucle principal:
 #
+# Obs: Lo habiamos hecho de esa forma pero luego con la correccion notamos que dentro de la funcion ya tendria que ocurrir el append
+#
 #   def agregar_libro() -> dict:
 #       libro = {"titulo": str(input(...)), "autor": str(input(...)), ...}
 #       ...
@@ -136,7 +138,7 @@ while True:
 #           self.especialidad = especialidad
 #
 #       def estadisticas(self):
-#           super().estadisticas()   # reutiliza las 4 líneas del padre
+#           super().estadisticas()   # reutiliza las 4 líneas del padre (en proyectos mas grandes se notaria mas)
 #           print(f"  Especialidad : {self.especialidad}")
 #
 # Agregar(), buscar_por_autor() y filtrar_por_genero() se heredan sin
