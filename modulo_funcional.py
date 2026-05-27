@@ -6,7 +6,7 @@ def titulos_leidos(biblioteca: Biblioteca) -> list:
     libros = biblioteca.libros #para el linter
 
     leidos = filter(lambda libro: libro.leido, libros)
-    titulos = map(lambda libro: libros.titulo, leidos)
+    titulos = map(lambda libro: libro.titulo, leidos)
     
     return list(titulos)
     
@@ -16,11 +16,8 @@ def resumen_coleccion(biblioteca: Biblioteca) -> str:
 
     libros = biblioteca.libros
 
-    def formatear_libro(libro):
-        estado = '✔' if libro.leido else '✘'
-        return f'"{libro.titulo}" — {libro.autor} ({libro.anio}) [{libro.genero}] {estado}'
+    resumenes = map(lambda l: f"[{'✔' if l.leido else '✘'}] {l.titulo} - {l.autor}", libros)
     
-    resumenes = map(formatear_libro, libros)
     return "\n".join(resumenes)
 
 def libros_por_anio(biblioteca: Biblioteca) -> list:
