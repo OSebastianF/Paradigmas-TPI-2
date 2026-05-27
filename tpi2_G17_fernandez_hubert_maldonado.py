@@ -3,6 +3,9 @@
 # 6216581 - Mario David Maldonado Gomez
 # 5266908 - Tim Julian Hubert Wiebe
 
+# Se usan estas funciones dentro del metodo estadisticas()
+from modulo_funcional import titulos_leidos, libros_por_anio
+
 from datetime import datetime # Se usa en pedir_libro() para validacion de anio 
 def pedir_entre(msg: str, min: int, max: int) -> int:
 	while True:
@@ -86,7 +89,13 @@ class Biblioteca():
     
     def estadisticas(self):
         """Muestra: total de libros, cantidad leídos, géneros únicos y el libro más reciente."""
-        pass
+        print("=== ESTADISTICAS ===")
+        print(f"- Total de Libros: {len(self)}.")
+        #print(f"- Cantidad de Libros Leidos: {len(list(filter(lambda l: l.leido, self.libros)))}.")    Mejor usar las funciones ya declaradas
+        print(f"- Cantidad de Libros Leidos: {len(titulos_leidos(self))}.")
+        if len(self) > 0:
+            libros_aux = libros_por_anio(self)  # Libros ordenados de menor a mayor anio    (Funcion de modulo_funcional.py)
+            print(f"- Libro mas reciente: {libros_aux[-1]}.")
       
 class BibliotecaEspecializada(Biblioteca):
     def __init__(self, nombre: str, especialidad: str):
@@ -95,6 +104,4 @@ class BibliotecaEspecializada(Biblioteca):
         
     def estadisticas(self):
         super().estadisticas()
-        # TODO: Extender agregando 'especialidad'
-        
-    # TODO: Extender los metodos de la clase Biblioteca que hagan falta
+        print(f"Especialidad de la Biblioteca: \"{self.especialidad}\".")

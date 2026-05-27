@@ -1,7 +1,6 @@
 from tpi2_G17_fernandez_hubert_maldonado import *
 from modulo_funcional import *
 
-# TODO: Implementar los metodos y agregarlos en las opciones
 """El menú del TPI 1 se mantiene, pero ahora opera sobre instancias de BibliotecaEspecializada. Al iniciarse el
 programa, se le solicita al usuario el nombre y la especialidad de la biblioteca."""
 
@@ -18,7 +17,6 @@ def mostrar_opciones():
     
 # Inicio del programa
 
-# TODO: Inicializar la biblioteca
 print('='*5, "Inicializar Biblioteca Especializadad", '='*5)
 bib = BibliotecaEspecializada(str(input("Ingrese el nombre de la biblioteca especializada: ")),
                                str(input("Ingrese la especialidad de la biblioteca: ")))
@@ -33,15 +31,6 @@ print('=' * 40)
 while True:
     mostrar_opciones()
     
-    """while True:
-        try:
-            op = int(input('Ingrese la opcion a ejecutar (1-8): '))
-            if (op < 1) or (op > 8):
-                raise ValueError
-        except ValueError:
-            print('ERROR (ValueError). No se ingreso una opcion valida (1-8).')
-        else:
-            break"""
     # Se usa la funcion definida en el archivo principal 
     op = pedir_entre('Ingrese la opcion a ejecutar (1-8): ', 1, 8)
     
@@ -67,23 +56,33 @@ while True:
 
     elif(op == 4):
         # Buscar por genero
-        genero_aux = input("Ingrese el genero de el/los libros: ")
+        genero_aux = str(input("Ingrese el genero de el/los libros: "))
         print(f"=== LIBROS DEL GENERO \"{genero_aux}\" ===")
         Libro.mostrar_lista_libros(bib.filtrar_por_genero(genero_aux))
         print('=' * 40)
 
     elif(op == 5):
         # Marcar libro como leído
-        titulo = input("Ingrese el título del libro: ")
+        if len(bib) == 0:
+            print(f"No hay ningun libro en la biblioteca \"{bib.nombre}\".")
+        else:
+            bib.mostrar_libros()
+            print('='*10)
+            n_aux = pedir_entre(f"Ingrese el numero del libro a marcar como leido (1, {len(bib)})", 1, len(bib))
+            bib.libros[n_aux-1].marcar_leido()
+            print(f"Libro {bib.libros[n_aux-1]} marcado como leido exitosamente!")            
         print('=' * 40)
 
     elif(op == 6):
         # Ver estadísticas
+        bib.estadisticas()
         print('=' * 40)
 
     elif(op == 7):
         # Exportar resumen
-        print("Cantidad de Libros:")
+        print("=== RESUMEN BIBLIOTECA ===")
+        print(f"== {len(bib)} libros ==")
+        print(resumen_coleccion(bib))
         print('=' * 40)
 
     elif(op == 8):
