@@ -68,9 +68,9 @@ while True:
         else:
             bib.mostrar_libros()
             print('='*10)
-            n_aux = pedir_entre(f"Ingrese el numero del libro a marcar como leido (1, {len(bib)})", 1, len(bib))
+            n_aux = pedir_entre(f"Ingrese el numero del libro a marcar como leido (1, {len(bib)}): ", 1, len(bib))
             bib.libros[n_aux-1].marcar_leido()
-            print(f"Libro {bib.libros[n_aux-1]} marcado como leido exitosamente!")            
+            print(f"El Libro == {bib.libros[n_aux-1]} == fue marcado como leido exitosamente!")            
         print('=' * 40)
 
     elif(op == 6):
@@ -82,7 +82,7 @@ while True:
         # Exportar resumen
         print("=== RESUMEN BIBLIOTECA ===")
         print(f"== {len(bib)} libros ==")
-        print(resumen_coleccion(bib))
+        if len(bib) > 0: print(resumen_coleccion(bib))
         print('=' * 40)
 
     elif(op == 8):

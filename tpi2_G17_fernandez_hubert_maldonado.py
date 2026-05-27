@@ -3,9 +3,6 @@
 # 6216581 - Mario David Maldonado Gomez
 # 5266908 - Tim Julian Hubert Wiebe
 
-# Se usan estas funciones dentro del metodo estadisticas()
-from modulo_funcional import titulos_leidos, libros_por_anio
-
 from datetime import datetime # Se usa en pedir_libro() para validacion de anio 
 def pedir_entre(msg: str, min: int, max: int) -> int:
 	while True:
@@ -46,7 +43,7 @@ class Libro():
         return cls(titulo, autor, anio, genero)
         
     @staticmethod
-    def mostrar_lista_libros(lista: list[Libro]):
+    def mostrar_lista_libros(lista: list):
         """Dada una lista de libros las imprime con el formato: {nro de libro}. [{leido}] - {titulo} ({anio}) - {autor} - {genero}.
         Si la lista esta vacia, imprime el mensaje 'Lista de Libros vacia.'"""
         if len(lista) == 0:
@@ -91,10 +88,11 @@ class Biblioteca():
         """Muestra: total de libros, cantidad leídos, géneros únicos y el libro más reciente."""
         print("=== ESTADISTICAS ===")
         print(f"- Total de Libros: {len(self)}.")
-        #print(f"- Cantidad de Libros Leidos: {len(list(filter(lambda l: l.leido, self.libros)))}.")    Mejor usar las funciones ya declaradas
-        print(f"- Cantidad de Libros Leidos: {len(titulos_leidos(self))}.")
+        print(f"- Cantidad de Libros Leidos: {len(list(filter(lambda l: l.leido, self.libros)))}.")
+        #print(f"- Cantidad de Libros Leidos: {len(titulos_leidos(self))}.")    --> Si se usara el modulo_funcionañ
         if len(self) > 0:
-            libros_aux = libros_por_anio(self)  # Libros ordenados de menor a mayor anio    (Funcion de modulo_funcional.py)
+            #libros_aux = libros_por_anio(self)  # Libros ordenados de menor a mayor anio    (Funcion de modulo_funcional.py)
+            libros_aux = sorted(self.libros, key=lambda libro: libro.anio)
             print(f"- Libro mas reciente: {libros_aux[-1]}.")
       
 class BibliotecaEspecializada(Biblioteca):
@@ -104,4 +102,4 @@ class BibliotecaEspecializada(Biblioteca):
         
     def estadisticas(self):
         super().estadisticas()
-        print(f"Especialidad de la Biblioteca: \"{self.especialidad}\".")
+        print(f"- Especialidad de la Biblioteca: \"{self.especialidad}\".")
